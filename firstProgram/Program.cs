@@ -157,10 +157,20 @@ void game(string typeOfGame, string userName)
         }
 
         // 2.show the operation and get result from user
-        int userRes = Int32.Parse(Console.ReadLine());
+        string stringUserRes = Console.ReadLine();
+        int intUserRes;
+
+        // Inserire un ciclo while per il controllo del dato
+        while (string.IsNullOrWhiteSpace(stringUserRes) || !Int32.TryParse(stringUserRes, out intUserRes))
+        {
+            Console.WriteLine("Invalid input, please try again...");
+            stringUserRes = Console.ReadLine();
+        }
+        intUserRes = Int32.Parse(stringUserRes);
+
 
         // 4. compare result and update the score
-        if (userRes == res)
+        if (intUserRes == res)
         {
             Console.WriteLine("Your answer was correct! Type any key to continue");
             Console.ReadLine();
@@ -196,7 +206,7 @@ void viewStatistics(string userName)
     
     if (statistics.Count < 1)
     {
-        Console.WriteLine("There are no statistics at the moment.");
+        Console.WriteLine("There are no statistics yet.");
     }
     else
     {
